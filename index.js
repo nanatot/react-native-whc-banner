@@ -427,7 +427,9 @@ export default class Banner extends Component {
         this.elementCount = length;
         let newChildren = [];
         if (autoLoop && length > 0) {
-            newChildren.push(children[length - 1], ...children, children[0]);
+            let lastChildren = React.cloneElement(children[length - 1], {key: Math.random()});
+            let firstChildren = React.cloneElement(children[0], {key: Math.random()});
+            newChildren.push(lastChildren, ...children, firstChildren);
         }else {
             newChildren.push(...children);
         }
@@ -458,6 +460,7 @@ export default class Banner extends Component {
                     titleStyle = {titleStyle}
                     count = {length}
                     titles = {titles}
+                    {...this.props}
                 />
             </View>
         );
